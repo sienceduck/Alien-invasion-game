@@ -13,6 +13,7 @@ class Ship:
         """Initialize the ship and place it's starting position"""
 
         self.screen = ai_game.screen
+        self.settings = ai_game.settings
 
         # method .get_rect() allows us to place the ship
         # in the correct location on the screen.
@@ -44,6 +45,32 @@ class Ship:
         and coordinates increase as you go down and to the right, f.e. on a
         1200×800 screen, the origin is at the lowest coord are at (1200, 800).
         """
+
+        # Store a float for the ship's exact horizontal and vertical position.
+        self.x = float(self.rect.x)  # needed to move by fraction of a pixel
+
+        # Movement flag; start with a ship that's not moving
+        self.moving_right = False
+        self.moving_left = False
+
+    def update(self):
+        """Update the ship's position based on the movement flag"""
+        # Update the ship's x value, not the rect.
+
+        # comparing rect and screen_rect to see is ship has reached the border
+        if self.moving_right and self.rect.right < self.screen_rect.right:
+            # if not, move it in this direction
+            self.x += self.settings.ship_speed
+        # if it had reached, it can go no further
+        if self.moving_left and self.rect.left > 0:
+            self.x -= self.settings.ship_speed
+
+        # using if statement for continuos movement in AlienInvasion run_game
+        # while loop
+
+        # Update rect object from self.x
+        self.rect.x = self.x
+        # only the integer portion of self.x will be assigned to self.rect.x
 
     def blitme(self):
         """Draw the ship and it's current location"""
