@@ -20,7 +20,7 @@ class Ship:
         self.screen_rect = ai_game.screen.get_rect()
 
         # Load the ship image and get its rect.
-        self.image = pygame.image.load("images/ship_nightraider.bmp")
+        self.image = pygame.image.load("images/ship_nightrader_small.bmp")
         # the native image format for pygame is .bmp
 
         self.rect = self.image.get_rect()  # this will be used to place the ship
