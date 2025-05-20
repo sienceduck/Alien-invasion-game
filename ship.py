@@ -46,7 +46,7 @@ class Ship:
         1200×800 screen, the origin is at the lowest coord are at (1200, 800).
         """
 
-        # Store a float for the ship's exact horizontal and vertical position.
+        # Store a float for the ship's exact horizontal position.
         self.x = float(self.rect.x)  # needed to move by fraction of a pixel
 
         # Movement flag; start with a ship that's not moving
@@ -71,6 +71,11 @@ class Ship:
         # Update rect object from self.x
         self.rect.x = self.x
         # only the integer portion of self.x will be assigned to self.rect.x
+
+    def center_ship(self):
+        """Center the ship on the screen"""
+        self.rect.midbottom = self.screen_rect.midbottom
+        self.x = float(self.rect.x)
 
     def blitme(self):
         """Draw the ship and it's current location"""
