@@ -1,16 +1,17 @@
-import pygame
+from pygame.sprite import Sprite
 
 # Pygame is efficient in treating all game elements like rectangles (rects),
 # cause they are simple geometric shapes, even if they’re not exactly shaped
 # like rectangles. Useful for colliding objects.
 
 
-class Ship:
+class Ship(Sprite):
     """A class to manage ship"""
 
     # referencing the AlienInvasion instance (ai_game) to obtain its parameters
-    def __init__(self, ai_game):
+    def __init__(self, ai_game, ship_image):
         """Initialize the ship and place it's starting position"""
+        super().__init__()
 
         self.screen = ai_game.screen
         self.settings = ai_game.settings
@@ -20,7 +21,7 @@ class Ship:
         self.screen_rect = ai_game.screen.get_rect()
 
         # Load the ship image and get its rect.
-        self.image = pygame.image.load("images/ship_nightrader_small.bmp")
+        self.image = ship_image
         # the native image format for pygame is .bmp
 
         self.rect = self.image.get_rect()  # this will be used to place the ship
