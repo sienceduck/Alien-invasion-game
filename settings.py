@@ -1,3 +1,5 @@
+import random
+
 # This file is a specific module for game's settings
 
 
@@ -20,8 +22,11 @@ class Settings:
         self.bullet_colour = (60, 60, 60)
         self.bullets_allowed = 5
 
+        # Projectile settings
+        self.animation_cooldown = 500
+
         # ALien settings
-        self.fleet_drop_speed = 10  # 10
+        self.fleet_drop_speed = 10  # default 10
         # shows how quickly fleet drops down each time it reaches either edge
 
         # Difficulty level
@@ -37,8 +42,11 @@ class Settings:
     def initialize_dynamic_settings(self):
         """Initialize settings that change throughout the game"""
         self.ship_speed = 3.5
-        self.bullet_speed = 5.0
         self.alien_speed = 1.0  # 1.0 base value
+        self.bullet_speed = 5.0
+
+        self.a_projectile_speed = 3.0
+        self.fire_interval = 1000
 
         # fleet_direction of 1 represents right; -1 represents left
         self.fleet_direction = 1
@@ -54,6 +62,9 @@ class Settings:
         self.ship_speed *= self.speedup_scale
         self.bullet_speed *= self.speedup_scale
         self.alien_speed *= self.speedup_scale
+        self.a_projectile_speed *= self.speedup_scale
+
+        self.fire_interval -= 100 * round(self.speedup_scale)
 
         self.alien_points = int(self.alien_points * self.score_scale)
         # after the game speeds up, player gains more points for alien
